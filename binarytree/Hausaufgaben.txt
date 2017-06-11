@@ -1,0 +1,31 @@
+#Binärbaum
+
+(1) Implementieren Sie die Methode "public List<Integer> asSortedList()", so dass sie alle Zahlen, die im Binärbaum gespeichert sind, 
+als (aufsteigend) sortierte Liste zurückgibt.
+
+(2) Implementieren Sie die Methode "public List<Integer> elementsSmallerThan(int value)" im Beispielprojekt: Diese soll nicht 
+alle Zahlen zurückgeben, sondern lediglich diejenigen, die kleiner als die übergebene Zahl (exklusiv) sind. Die Zahlen sollen 
+dabei weiterhin sortiert bleiben.
+
+(3) Modifizieren Sie die bereits vorhandene Methode "public void insert(int value)" so, dass diese 'true' zurückgibt, wenn 
+die übergebene Zahl tatsächlich eingefügt wurde. Falls die Zahl bereits vorhanden ist gibt die Methode 'false' zurück. 
+Welche Aussage lässt sich über die gespeicherten Werte im Baum machen?
+
+(4) Implementieren Sie die Methode "public boolean contains(int value)". Die Methode soll 'true' zurrückgeben, wenn der 
+gesuchte Wert 'value' im Baum enthalten ist, andernfalls 'false'.
+
+(5) Schreiben Sie das Beispielprogramm BinaryTree so um, dass sich beliebige Datentypen in den Binärbaum speichern lassen (siehe Generics).
+
+#Verzeichnisse und Dateien
+
+(6) Schreiben Sie ein Programm mit der Methode "public void showFiles(File directory)", die ein beliebiges Verzeichnis rekursiv 
+durchläuft und alle Dateien, die sich in 'directory'  und ggf. in weiteren Unterverzeichnissen befinden, auf der Konsole ausgibt. 
+Repräsentiert ein "java.util.File" ein Verzeichnis, so lässt sich durch die Methode "listFiles()" eine Auflistung aller enthaltenen Dateien 
+und Verzeichnisse erreichen - für jedes weitere Unterverzeichnis muss die Methode erneut aufgerufen werden.
+
+(7) Erweitern Sie das Programm, indem Sie eine weitere Methode "public List<File> getFiles(File directory)" hinzufügen. 
+Die Methode liefert eine Liste mit allen Dateien (keine Verzeichnisse) aus 'dir' und allen Unterverzeichnissen.
+
+(8) Erweitern Sie ein letztes Mal das Programm… Die Liste mit File-Objekten aus Aufgabe (7) soll nun sortiert werden. 
+Die File-Objekte sollen nach ihren Dateinamen (siehe  "java.io.File#getName()") sortiert werden. Nutzen Sie dafür die 
+statische Methode "java.util.Collections.sort(List<T>, Comparator)".
