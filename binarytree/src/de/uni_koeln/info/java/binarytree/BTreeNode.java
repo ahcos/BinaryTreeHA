@@ -1,12 +1,12 @@
 package de.uni_koeln.info.java.binarytree;
-public class BTreeNode {
+public class BTreeNode<T extends Comparable<T>> {
 
-	BTreeNode left;
-	BTreeNode right;
-	int value;
+	BTreeNode<T> left;
+	BTreeNode<T> right;
+	T value;
 	
 
-	public BTreeNode(int value) {
+	public BTreeNode(T value) {
 		this.value = value;
 	}
 

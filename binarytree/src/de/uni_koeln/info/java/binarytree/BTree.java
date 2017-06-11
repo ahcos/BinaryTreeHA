@@ -1,7 +1,7 @@
 package de.uni_koeln.info.java.binarytree;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
+
 import java.util.List;
 import java.util.Stack;
 
@@ -132,25 +132,25 @@ import java.util.Stack;
  * @author matana (Mihail Atanassov)
  * 
  */
-public class BTree {
+public class BTree<T extends Comparable<T>> {
 	
 	
 	// Die Wurzel des Binärbaums
-	BTreeNode root;
+	BTreeNode<T> root;
 
 	public BTree() {
 		// Default-Konstruktor
 	}
 	
-	public BTree(int[] input) {
-		for (int value : input) {
+	public BTree(T[] input) {
+		for (T value : input) {
 			insert(value);
 		}
 	}
 
-	public boolean insert(int value) {
+	public boolean insert(T value) {
 		if (root == null) { // Baum ist leer?
-			root = new BTreeNode(value); // Wurzel wird erzeugt...
+			root = new BTreeNode<T>(value); // Wurzel wird erzeugt...
 			return true;	
 		}
 		
@@ -158,21 +158,22 @@ public class BTree {
 			return insert(root, value); // Rekursives Einfügen des Wertes 'value' im Baum
 	}
 
-	private boolean insert(BTreeNode currentNode, int value) {
+	private boolean insert(BTreeNode<T> currentNode, T value) {
 		
 		if (currentNode != null) {
-		    if (value < currentNode.value ) { // Wert ist kleiner, als der Wert im aktuellen Knoten, d.h. wir gehen nach links...
+			
+		    if (0 < value.compareTo(currentNode.value)) { // Wert ist kleiner, als der Wert im aktuellen Knoten, d.h. wir gehen nach links...
 			if (currentNode.left == null) { // Linker Teilbaum leer?
-				currentNode.left = new BTreeNode(value); // Erzege neuen Knoten
+				currentNode.left = new BTreeNode<T>(value); // Erzege neuen Knoten
 				return true;
 			} else 
 				return insert(currentNode.left, value); // Linker Teilbaum nicht leer, d.h. wir steigen ab (rekursiv)
 		}
 		
 
-		else if (value > currentNode.value) { // Wert ist größer, als der Wert im aktuellen Knoten, wir gehen nach rechts... 
+		else if (0 > value.compareTo(currentNode.value)) { // Wert ist größer, als der Wert im aktuellen Knoten, wir gehen nach rechts... 
 			if (currentNode.right == null) { // Rechter Teilbaum leer?
-				currentNode.right = new BTreeNode(value); // Erzege neuen Knoten
+				currentNode.right = new BTreeNode<T>(value); // Erzege neuen Knoten
 				return true;
 			} else 
 				return insert(currentNode.right, value); // Rechter Teilbaum nicht leer, d.h. wir steigen ab (rekursiv)
@@ -203,7 +204,7 @@ public class BTree {
 	 * 
 	 * @param currentNode
 	 */
-	private void print(BTreeNode currentNode) {
+	private void print(BTreeNode<T> currentNode) {
 		/*
 		 * Hier eine in-order Implementation (l-W-r). Diese Travesierungsart hat
 		 * den Vorteil, dass die in den Knoten gespeicherten Werte in einer sortierten
@@ -232,14 +233,14 @@ public class BTree {
 	 * @param value
 	 * @return
 	 */
-	public boolean contains(int value) {
+	public boolean contains(T value) {
 	// Hilfsvariable die für den Anfang den Wert von root annimmt, aber verändert werden soll
-	BTreeNode current = root; 
+	BTreeNode<T> current = root; 
 
 	while (current != null) {
-		if (current.value < value)
+		if (0 > value.compareTo(current.value))
 			current = current.right;
-		else if (current.value > value)
+		else if (0 < value.compareTo(current.value))
 			current = current.left;
 		else
 			return true;
@@ -256,15 +257,15 @@ public class BTree {
  * 
  * @return List
  */
-public List<Integer> asSortedList() {
+public List<T> asSortedList() {
 	
 	// alle benötigten Datentypen initialisieren
 	
-	List<Integer> toReturn = new ArrayList<Integer>();
+	List<T> toReturn = new ArrayList<T>();
 	
-	Stack<BTreeNode> stack = new Stack<BTreeNode>();
+	Stack<BTreeNode<T>> stack = new Stack<BTreeNode<T>>();
 	
-	BTreeNode current = root;
+	BTreeNode<T> current = root;
 	
 // In meinen eigenen Worten folgende Schleife:
 	// Während current existiert:
@@ -342,19 +343,19 @@ public List<Integer> asSortedList() {
 	 * @param value
 	 * @return List
 	 */
-	public List<Integer> elementsSmallerThan(int value) {
+	public List<T> elementsSmallerThan(T value) {
 		
 		// Datenstrukturen erzeugen
-		List<Integer> list = asSortedList();
+		List<T> list = asSortedList();
 		
-		ArrayList<Integer> rTurn = new ArrayList<Integer>(list);
-		ArrayList<Integer> toReturn = new ArrayList<Integer>();
+		ArrayList<T> rTurn = new ArrayList<T>(list);
+		ArrayList<T> toReturn = new ArrayList<T>();
 		
 		// alle Werte die kleiner sind als Value umkopieren
 		
-		for (Integer integer : rTurn) {
-			if(integer < value)
-				toReturn.add(integer);
+		for (T item : rTurn) {
+			if(0 < value.compareTo(item))
+				toReturn.add(item);
 		}
 		
 		//ich weiß nicht, wieso die folgende Schleife nicht genau das gleiche tut

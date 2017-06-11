@@ -9,12 +9,12 @@ import org.junit.Test;
 
 public class BInaryTreeTests {
 	
-	private BTree bTree;
+	private BTree<Integer> bTree;
 
 	@Before
 	public void setup() {
-		int[] input  = { 6, 9, 4, 13, 17, 1, 10, 5, 7, 3 };
-		bTree = new BTree(input);
+		Integer[] input  = { 6, 9, 4, 13, 17, 1, 10, 5, 7, 3 };
+		bTree = new BTree<Integer>(input);
 //		 bTree.print();
 	}
 	
