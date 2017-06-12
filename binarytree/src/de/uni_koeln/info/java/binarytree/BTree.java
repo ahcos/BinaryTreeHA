@@ -237,13 +237,13 @@ public class BTree<T extends Comparable<T>> {
 	// Hilfsvariable die für den Anfang den Wert von root annimmt, aber verändert werden soll
 	BTreeNode<T> current = root; 
 
-	while (current != null) {
-		if (0 > value.compareTo(current.value))
+	while (current != null) { // Abbruchbedingung: Blatt erreicht, also current == null
+		if (0 > value.compareTo(current.value)) // falls value größer current.value, steige rechts ab
 			current = current.right;
-		else if (0 < value.compareTo(current.value))
+		else if (0 < value.compareTo(current.value)) // ebenso links
 			current = current.left;
-		else
-			return true;
+		else							// weder kleiner noch größer? also value == current.value, also true
+			return true; 
 		
 	}
 	
@@ -323,14 +323,8 @@ public List<T> asSortedList() {
 		}
 		
 	}
-	toReturn.add(root.value);
-//	System.out.println("///");
+	toReturn.add(root.value); // da dieser Wert von der Schleife nicht erfasst wird, noch drauf packen
 	
-	
-//	for (Integer i : toReturn) {
-//		System.out.println(i);
-//	}
-//	
 	
 	// Liste sortieren, zurückgeben.
 	Collections.sort(toReturn);
@@ -359,7 +353,8 @@ public List<T> asSortedList() {
 		}
 		
 		//ich weiß nicht, wieso die folgende Schleife nicht genau das gleiche tut
-		//aber sie tut es nicht ¯\_(ツ)_/¯
+		//aber sie tut es nicht ¯\_(ツ)_/¯ 
+		// bezieht sich auf frühe Version des Programms mit int input
 		
 		
 //		for (int i = 0; i < rTurn.size(); i++) {
